@@ -1,6 +1,11 @@
+import { useState } from 'react';
 import CloseBtn from '../assets/img/close.svg';
 
 const Modal = ({ setModal, animateModal, setAnimateModal }) => {
+    const [name, setName] = useState('');
+    const [amount, setAmount] = useState('');
+    const [category, setCategory] = useState('');
+
     const hideModal = () => {
         setAnimateModal(false);
 
@@ -28,6 +33,8 @@ const Modal = ({ setModal, animateModal, setAnimateModal }) => {
                         id='name'
                         type="text"
                         placeholder='Add expense name'
+                        value={name}
+                        onChange={e => setName(e.target.value)}
                     />
                 </div>
 
@@ -38,13 +45,19 @@ const Modal = ({ setModal, animateModal, setAnimateModal }) => {
                         id='amount'
                         type="number"
                         placeholder='Add amount expense'
+                        value={amount}
+                        onChange={e => setAmount(Number(e.target.value))}
                     />
                 </div>
 
                 <div className='campo'>
                     <label htmlFor="category">Category</label>
 
-                    <select id="category">
+                    <select
+                        id="category"
+                        value={category}
+                        onChange={e => setCategory(e.target.value)}
+                    >
                         <option value="">-- Select --</option>
                         <option value="saving">Saving</option>
                         <option value="food">Food</option>
@@ -56,7 +69,7 @@ const Modal = ({ setModal, animateModal, setAnimateModal }) => {
                     </select>
                 </div>
 
-                <input type="submit" value="Add expense"/>
+                <input type="submit" value="Add expense" />
             </form>
         </div>
     )
