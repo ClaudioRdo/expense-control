@@ -2,7 +2,7 @@ import { useState } from 'react';
 import Message from './Message';
 import CloseBtn from '../assets/img/close.svg';
 
-const Modal = ({ setModal, animateModal, setAnimateModal }) => {
+const Modal = ({ setModal, animateModal, setAnimateModal, saveExpense }) => {
 
     const [msg, setMsg] = useState('');
     const [name, setName] = useState('');
@@ -17,12 +17,14 @@ const Modal = ({ setModal, animateModal, setAnimateModal }) => {
         }, 500);
     };
 
-    const handleSubmit = () => {
+    const handleSubmit = (e) => {
         e.preventDefault();
-        if([name, amount, category].includes()){
+        if([name, amount, category].includes('') || amount <= 0){
             setMsg('All fields are required');
             return;
         };
+
+        saveExpense({name, amount, category});
 
         setMsg('');
     }
