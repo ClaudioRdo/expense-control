@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import Header from './components/Header';
+import ExpensesList from './components/ExpensesList';
 import Modal from './components/Modal';
 import { generateId } from './helpers';
 import IconNewExpense from './assets/img/new-expense.svg';
@@ -22,10 +23,11 @@ function App() {
   };
 
   const saveExpense = (expense) => {
-      expense.id = generateId();
-      setExpenses([...expenses, expense]);
+    expense.id = generateId();
+    expense.date = Date.now();
+    setExpenses([...expenses, expense]);
 
-      setModal(false);
+    setModal(false);
   }
 
   return (
@@ -37,18 +39,24 @@ function App() {
         setIsValidBudget={setIsValidBudget}
       />
       {isValidBudget && (
-        <div className='nuevo-gasto'>
-        <img src={IconNewExpense} alt="Plus icon" 
-          onClick={handleNewExpense}
-        />
-      </div>
-      ) }
-       {modal && <Modal 
-                    setModal={setModal} 
-                    animateModal={animateModal} 
-                    setAnimateModal={setAnimateModal}
-                    saveExpense={saveExpense}  
-                  />}
+        <>
+          <main>
+            <ExpensesList expenses={expenses}/>
+          </main>
+          <div className='nuevo-gasto'>
+            <img src={IconNewExpense} alt="Plus icon"
+              onClick={handleNewExpense}
+            />
+          </div>
+        </>
+
+      )}
+      {modal && <Modal
+        setModal={setModal}
+        animateModal={animateModal}
+        setAnimateModal={setAnimateModal}
+        saveExpense={saveExpense}
+      />}
     </div>
   )
 }
