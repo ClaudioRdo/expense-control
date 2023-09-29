@@ -24,7 +24,7 @@ const expense = ({ expense }) => {
         <div className="gasto sombra">
             <div className="contenido-gasto">
                 <div className="descripcion-gasto">
-                    <img src={iconsDictionary[category]} alt="" />
+                    <img src={iconsDictionary[category]} alt="category" />
                     <p className="categoria">{category}</p>
                     <p className="nombre-gasto">{name}</p>
                     <p className="fecha-gasto">Added: <span>{formatDate(date)}</span></p>
