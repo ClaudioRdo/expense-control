@@ -26,16 +26,25 @@ const iconsDictionary = {
     subscriptions: IconSubscriptions,
 };
 
-const leadingActions = () => {
-
-};
-
-const trailingActions = () => {
-
-};
-
-const expense = ({ expense }) => {
+const Expense = ({ expense, setEditExpense }) => {
     const { category, name, amount, id, date } = expense;
+
+    const leadingActions = () => (
+        <LeadingActions>
+            <SwipeAction onClick={() => setEditExpense(expense)}>
+                Edit
+            </SwipeAction>
+        </LeadingActions>
+    );
+    
+    const trailingActions = () => (
+        <TrailingActions>
+            <SwipeAction onClick={()=> console.log('delete')}>
+                Delete
+            </SwipeAction>
+        </TrailingActions>
+    );
+
     return (
         <SwipeableList>
             <SwipeableListItem
@@ -59,4 +68,4 @@ const expense = ({ expense }) => {
     )
 }
 
-export default expense
+export default Expense

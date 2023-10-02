@@ -14,6 +14,8 @@ function App() {
 
   const [expenses, setExpenses] = useState([]);
 
+  const [editExpense, setEditExpense] = useState({});
+  const [deleteExpense, setDeleteExpense] = useState();
   const handleNewExpense = () => {
     setModal(true);
 
@@ -42,7 +44,7 @@ function App() {
       {isValidBudget && (
         <>
           <main>
-            <ExpensesList expenses={expenses}/>
+            <ExpensesList expenses={expenses} setEditExpense={setEditExpense}/>
           </main>
           <div className='nuevo-gasto'>
             <img src={IconNewExpense} alt="Plus icon"
