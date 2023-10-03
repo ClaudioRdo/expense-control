@@ -1,4 +1,4 @@
-import Expense from './expense';
+import Expense from './Expense';
 
 const ExpensesList = ({expenses, setEditExpense}) => {
   return (
@@ -9,6 +9,7 @@ const ExpensesList = ({expenses, setEditExpense}) => {
             <Expense 
                 key={expense.id}
                 expense={expense}
+                setEditExpense={setEditExpense}
             />
         ))}
     </div>

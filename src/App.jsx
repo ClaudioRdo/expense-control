@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Header from './components/Header';
 import ExpensesList from './components/ExpensesList';
 import Modal from './components/Modal';
@@ -16,8 +16,20 @@ function App() {
 
   const [editExpense, setEditExpense] = useState({});
   const [deleteExpense, setDeleteExpense] = useState();
+
+  useEffect(() => {
+    if(Object.keys(editExpense).length > 0) {
+      setModal(true);
+      
+      setTimeout(() => {
+        setAnimateModal(true);
+      }, 500);
+    } 
+  }, [editExpense])
+  
   const handleNewExpense = () => {
     setModal(true);
+    setEditExpense({});
 
     setTimeout(() => {
       setAnimateModal(true);
@@ -59,6 +71,7 @@ function App() {
         animateModal={animateModal}
         setAnimateModal={setAnimateModal}
         saveExpense={saveExpense}
+        editExpense={editExpense}
       />}
     </div>
   )
