@@ -1,17 +1,34 @@
 import Expense from './Expense';
 
-const ExpensesList = ({expenses, setEditExpense}) => {
+const ExpensesList = ({ expenses, setEditExpense, deleteExpense, filter, filteredExpenses }) => {
   return (
     <div className='listado-gastos contenedor'>
-        <h2>{expenses.length ? 'Expenses' : 'There are no expenses yet'}</h2>
+      {filter ? (
+        <>
+          <h2>{filteredExpenses.length ? 'Expenses' : 'There are no expenses in this category yet'}</h2>
 
-        {expenses.map(expense => (
-            <Expense 
-                key={expense.id}
-                expense={expense}
-                setEditExpense={setEditExpense}
+          {filteredExpenses.map(expense => (
+            <Expense
+              key={expense.id}
+              expense={expense}
+              setEditExpense={setEditExpense}
+              deleteExpense={deleteExpense}
             />
-        ))}
+          ))}
+        </>
+      ) : (
+        <>
+          <h2>{expenses.length ? 'Expenses' : 'There are no expenses yet'}</h2>
+
+          {expenses.map(expense => (
+            <Expense
+              key={expense.id}
+              expense={expense}
+              setEditExpense={setEditExpense}
+            />
+          ))}
+        </>
+      )}
     </div>
   )
 }
